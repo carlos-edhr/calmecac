@@ -18,10 +18,14 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.contrib.auth.views import LoginView, LogoutView
+from django.urls import path, include
 
 urlpatterns = [
+    path("accounts/login/", LoginView.as_view(), name="login"),
+    path("accounts/logout/", LogoutView.as_view(), name="logout"),
     path("admin/", admin.site.urls),
+    path("course/", include("courses.urls")),
 ]
 
 if settings.DEBUG:
